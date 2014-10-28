@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="gemStore">
+  <head>
+
+    <!-- Loading CSS dependencies -->
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-css/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="app.css" />
+    
+    <!-- Loading Angular Libraries -->
+    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+    
+    <!-- Loading the APP specific files -->
+    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript" src="app/controllers.js"></script>
+
+  </head>
+  <body ng-app="auth0-sample" class="home" ng-controller="mainController">
+      <div class="login-page clearfix">
+        <div class="login-box auth0-box" ng-hide="loggedIn">
+          <img src="https://i.cloudup.com/StzWWrY34s.png" />
+          <h3>Auth0 Example</h3>
+          <p>Zero friction identity infrastructure, built for developers</p>
+           <a ng-click="login()" class="btn btn-primary btn-lg btn-block">SignIn</a>
+        </div>
+        
+        <!-- This log in page would normally be done using routes
+        but for the simplicity of the excercise, we're using ng-show -->
+        <div ng-show="loggedIn" class="logged-in-box auth0-box">
+          <img ng-src="{{auth.profile.picture}}" class="avatar"/>
+          <h3>Welcome {{auth.profile.name}}</h3>
+          <div class="profile-info row">
+              <div class="profile-info-label col-xs-6">Nickname</div>
+              <div class="profile-info-content col-xs-6">{{auth.profile.nickname}}</div>
+          </div>
+          <div class="profile-info row">
+              <div class="profile-info-label col-xs-6">Your JSON Web Token</div>
+              <div class="profile-info-content col-xs-6">{{auth.idToken | limitTo:12}}...</div>
+
+          </div>
+               <div class="profile-info row">
+                  <a ng-href ="#/shipments" class="btn btn-success btn-sm btn-block">View my shipments</a>
+             </div>
+             <div class="profile-info row">
+                  <a ng-click="logout()" class="btn btn-danger btn-sm btn-block">Log out</a>
+             </div>
+        </div>
+        <div data-ng-view=""></div>
+      </div>
+  </body>
+</html>
